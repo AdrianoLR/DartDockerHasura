@@ -23,3 +23,9 @@ query MyQuery {
 
 Pegue os valores cadastrados na tabela de usuarios para inseri-los corretamente no método.
 
+
+# CRÉDITOS  
+Fluterrando e ao Jacob Moura   
+
+Video aula desse projeto  
+https://www.youtube.com/watch?v=ttRdrySzvRY
