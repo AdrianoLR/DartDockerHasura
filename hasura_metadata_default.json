@@ -1,0 +1,172 @@
+{
+  "resource_version": 13,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "datasource",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "schema": "public",
+              "name": "companies"
+            },
+            "array_relationships": [
+              {
+                "name": "users",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "id_company",
+                    "table": {
+                      "schema": "public",
+                      "name": "users"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "name"
+                  ],
+                  "filter": {
+                    "id": {
+                      "_eq": "X-Hasura-User-Id"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "public",
+              "name": "role_titles"
+            },
+            "array_relationships": [
+              {
+                "name": "roles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "id_role_title",
+                    "table": {
+                      "schema": "public",
+                      "name": "roles"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "public",
+              "name": "roles"
+            },
+            "object_relationships": [
+              {
+                "name": "role_title",
+                "using": {
+                  "foreign_key_constraint_on": "id_role_title"
+                }
+              },
+              {
+                "name": "user",
+                "using": {
+                  "foreign_key_constraint_on": "id_user"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "public",
+              "name": "users"
+            },
+            "object_relationships": [
+              {
+                "name": "company",
+                "using": {
+                  "foreign_key_constraint_on": "id_company"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "roles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "id_user",
+                    "table": {
+                      "schema": "public",
+                      "name": "roles"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "use_prepared_statements": false,
+            "database_url": {
+              "from_env": "PG_DATABASE_URL"
+            },
+            "isolation_level": "read-committed"
+          }
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "loginAction",
+        "definition": {
+          "handler": "http://host.docker.internal:4000/auth/login",
+          "output_type": "Tokenization",
+          "arguments": [
+            {
+              "name": "email",
+              "type": "String!"
+            },
+            {
+              "name": "password",
+              "type": "String!"
+            },
+            {
+              "name": "id_company",
+              "type": "Int!"
+            }
+          ],
+          "type": "query"
+        }
+      }
+    ],
+    "custom_types": {
+      "objects": [
+        {
+          "name": "Tokenization",
+          "fields": [
+            {
+              "name": "accessToken",
+              "type": "String!"
+            },
+            {
+              "name": "refreshToken",
+              "type": "String!"
+            },
+            {
+              "name": "expireIn",
+              "type": "bigint!"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
