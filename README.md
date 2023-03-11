@@ -1,15 +1,15 @@
 # Hasura + Dart + Docker
-Conectando ao Hasura usando Dart e Docker:
+Connecting to Hasura using Dart and Docker:
 
-Instale o Docker na sua maquina, verifique se obtiver erros com WSL 2, precisará seguir alguns passos para ativa-lo no Windows 10, após configura-lo, o arquivo docker-compose que esta na Master será o responsável pela criação do Hasura.
+Install Docker on your machine, check if you get errors with WSL 2, you will need to follow some steps to activate it in Windows 10, after configuring it, the docker-compose file that is in the Master will be responsible for creating Hasura.
 
-**Comandos:**
-  - `docker-compose up -d` : **para subir o docker com as configurações do Hasura.**
-  - `docker-compose down` : **para parar o docker e subir novamente caso haja alteração no arquivo.**
+**Commands:**
+  - `docker-compose up -d` : **to upload docker with Hasura settings.**
+  - `docker-compose down` : **to stop docker and go up again if there is a change in the file.**
 
-No Hasura vá em configurações e importe o metadata em formato .json que esta na solução.
+In Hasura, go to settings and import the metadata in .json format that is in the solution.
 
-Utilize o Action `loginAction()` que foi criado para bater na back-end no Dart:
+Use the Action `loginAction()` that was created to hit the backend in Dart:
 
 ```
 query MyQuery {
@@ -21,11 +21,8 @@ query MyQuery {
 }
 ```
 
-Pegue os valores cadastrados na tabela de usuarios para inseri-los corretamente no método.
+Take the values registered in the users table to insert them correctly in the method.
 
 
-# CRÉDITOS  
+# CRÉDITS  
 Fluterrando e ao Jacob Moura   
-
-Video aula desse projeto  
-https://www.youtube.com/watch?v=ttRdrySzvRY
