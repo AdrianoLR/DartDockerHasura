@@ -25,4 +25,4 @@ Take the values registered in the users table to insert them correctly in the me
 
 
 # CRÉDITS  
-Fluterrando e ao Jacob Moura   
+Fluterrando and Jacob Moura
